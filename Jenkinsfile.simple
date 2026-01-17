@@ -1,11 +1,29 @@
-pipeline {
-    agent any
-	stages {
-        stage('Log') {
-            steps {
-				echo "BuildId: ${BUILD_ID}"
-				echo "BRANCH_NAME: ${GIT_BRANCH}"
+def v = "1"
+
+if(v == "1"){
+	pipeline {
+		agent any
+		stages {
+			stage('Log') {
+				steps {
+					echo "BuildId: ${BUILD_ID}"
+					echo "BRANCH_NAME: ${GIT_BRANCH}"
+				}
 			}
-        }
-    }
+		}
+	}
+} else {
+	pipeline {
+		agent any
+		stages {
+			stage('Log') {
+				steps {
+					echo "Second branch"
+				}
+			}
+		}
+	}
 }
+
+
+
