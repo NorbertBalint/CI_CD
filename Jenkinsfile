@@ -1,7 +1,7 @@
 pipeline {
 	 environment {
         GIT_REPO = 'http://github.com/NorbertBalint/MyApp.git'
-		BRANCH="origin/main"
+		BRANCH="main"
     }
 	
     agent any
