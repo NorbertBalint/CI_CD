@@ -1,7 +1,17 @@
 pipeline {
 	 environment {
         GIT_REPO = 'http://github.com/NorbertBalint/MyApp.git'
-		BRANCH="main"
+    }
+	
+	parameters {
+        gitParameter branchFilter: 'origin/(.*)',
+            defaultValue: 'main',
+            name: 'BRANCH',
+            quickFilterEnabled: true,
+            selectedValue: 'NONE',
+            sortMode: 'ASCENDING_SMART',
+            tagFilter: '*',
+            type: 'PT_BRANCH'
     }
 	
     agent any
