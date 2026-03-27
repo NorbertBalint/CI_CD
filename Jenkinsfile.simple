@@ -1,29 +1,40 @@
-def v = "1"
+pipeline {
+	agent any
 
-if(v == "1"){
-	pipeline {
-		agent any
-		stages {
+	environment {
+	    GIT_REPO = 'https://github.com/NorbertBalint/MyApp'
+	}
+
+	parameters {
+        gitParameter branchFilter: 'origin/(.*)',
+            defaultValue: 'main',
+            name: 'BRANCH',
+            quickFilterEnabled: true,
+            selectedValue: 'NONE',
+            sortMode: 'ASCENDING_SMART',
+            tagFilter: '*',
+            type: 'PT_BRANCH'
+    }
+
+    options {
+        skipDefaultCheckout(true)
+    }
+    stages {
+        stage('Checkout App') {
+            steps {
+                // This becomes the source for your "Changes" list in the UI
+                git url: 'https://github.com/NorbertBalint/MyApp',
+                    branch: params.BRANCH,
+                    changelog: true,
+                    poll: true
+            }
+        }
 			stage('Log') {
 				steps {
-					echo "BuildId: ${BUILD_ID}"
-					echo "BRANCH_NAME: ${GIT_BRANCH}"
-				}
-			}
-		}
-	}
-} else {
-	pipeline {
-		agent any
-		stages {
-			stage('Log') {
-				steps {
-					echo "Second branch"
-				}
-			}
-		}
-	}
+                    echo "BuildId: ${BUILD_ID}"
+                    echo "PARAM_BRANCH_NAME: ${params.BRANCH}"
+                    }
+                }
+            }
 }
-
-
 
