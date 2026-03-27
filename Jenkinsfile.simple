@@ -13,7 +13,8 @@ pipeline {
             selectedValue: 'NONE',
             sortMode: 'ASCENDING_SMART',
             tagFilter: '*',
-            type: 'PT_BRANCH'
+            type: 'PT_BRANCH',
+			useRepository: 'https://github.com/NorbertBalint/MyApp'
     }
 
     options {
